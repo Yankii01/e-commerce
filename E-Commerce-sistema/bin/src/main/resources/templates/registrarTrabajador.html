@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario Trabajador</title>
+    <!-- Vincular Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="mb-4 text-center">Formulario Trabajador</h2>
+        <form action="/guardarTrabajador" method="POST">
+            
+            <!-- ID Trabajador (Solo Lectura) -->
+            <div class="mb-3">
+                <label for="idTrabajador" class="form-label">ID Trabajador:</label>
+                <input type="text" class="form-control" id="idTrabajador" name="idTrabajador" readonly>
+            </div>
+
+            <!-- Nombre del Trabajador -->
+            <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre:</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" placeholder="Ingrese el nombre del trabajador" maxlength="100" required>
+            </div>
+
+            <!-- Sede (Clave Foránea) -->
+            <div class="mb-3">
+                <label for="sede" class="form-label">Sede:</label>
+                <select id="sede" name="sede_id" class="form-select" required>
+                    <option value="">Seleccione una sede</option>
+                    <!-- Opciones dinámicas de sedes desde el backend -->
+                    <option value="1">Sede 1</option>
+                    <option value="2">Sede 2</option>
+                </select>
+            </div>
+
+            <!-- Usuario (Clave Foránea) -->
+            <div class="mb-3">
+                <label for="usuario" class="form-label">Usuario:</label>
+                <select id="usuario" name="usuario_id" class="form-select" required>
+                    <option value="">Seleccione un usuario</option>
+                    <!-- Opciones dinámicas de usuarios desde el backend -->
+                    <option value="1">Usuario 1</option>
+                    <option value="2">Usuario 2</option>
+                </select>
+            </div>
+
+            <!-- Botón de Guardar -->
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-primary">Guardar Trabajador</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Vincular JavaScript de Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

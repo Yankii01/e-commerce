@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario Boleta</title>
+    <!-- Vincular Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="mb-4">Formulario Boleta</h2>
+        <form action="/guardarBoleta" method="POST">
+            <!-- ID Boleta (Solo Lectura) -->
+            <div class="mb-3">
+                <label for="idBoleta" class="form-label">ID Boleta:</label>
+                <input type="text" class="form-control" id="idBoleta" name="idBoleta" readonly>
+            </div>
+
+            <!-- Pedido (Clave foránea) -->
+            <div class="mb-3">
+                <label for="pedido" class="form-label">Pedido:</label>
+                <select id="pedido" name="pedido_id" class="form-select" required>
+                    <option value="">Seleccione un pedido</option>
+                    <!-- Opciones dinámicas de pedidos obtenidas desde el backend -->
+                    <option value="1">Pedido 1</option>
+                    <option value="2">Pedido 2</option>
+                </select>
+            </div>
+
+            <!-- Usuario (Clave foránea) -->
+            <div class="mb-3">
+                <label for="usuario" class="form-label">Usuario:</label>
+                <select id="usuario" name="usuario_id" class="form-select" required>
+                    <option value="">Seleccione un usuario</option>
+                    <!-- Opciones dinámicas de usuarios obtenidas desde el backend -->
+                    <option value="1">Usuario 1</option>
+                    <option value="2">Usuario 2</option>
+                </select>
+            </div>
+
+            <!-- Trabajador (Clave foránea) -->
+            <div class="mb-3">
+                <label for="trabajador" class="form-label">Trabajador:</label>
+                <select id="trabajador" name="trabajador_id" class="form-select" required>
+                    <option value="">Seleccione un trabajador</option>
+                    <!-- Opciones dinámicas de trabajadores obtenidas desde el backend -->
+                    <option value="1">Trabajador 1</option>
+                    <option value="2">Trabajador 2</option>
+                </select>
+            </div>
+
+            <!-- Fecha -->
+            <div class="mb-3">
+                <label for="fecha" class="form-label">Fecha:</label>
+                <input type="date" class="form-control" id="fecha" name="fecha">
+            </div>
+
+            <!-- Total a Cobrar -->
+            <div class="mb-3">
+                <label for="totalCobrar" class="form-label">Total a Cobrar:</label>
+                <input type="number" step="0.01" class="form-control" id="totalCobrar" name="totalCobrar" required>
+            </div>
+
+            <!-- Botón de Guardar -->
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-primary">Guardar Boleta</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Vincular JavaScript de Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ver Boletas</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.3/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <div class="container mt-5">
+        <h1 class="text-center">Lista de Boletas</h1>
+
+        <!-- Tabla para mostrar las boletas -->
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Pedido</th>
+                    <th>Usuario</th>
+                    <th>Fecha</th>
+                    <th>Total a Cobrar</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Lógica para mostrar las boletas -->
+                <tr th:each="boleta : ${boletas}">
+                    <td th:text="${boleta.idBoleta}"></td>
+                    <td th:text="${boleta.tb_pedido.idPedido}"></td>
+                    <td th:text="${boleta.tb_usuario.nombre}"></td>
+                    <td th:text="${#dates.format(boleta.fecha, 'dd/MM/yyyy')}"></td>
+                    <td th:text="${boleta.totalCobrar}"></td>
+                    <td>
+                        <!-- Botones para editar y eliminar -->
+                        <a th:href="@{/editarBoleta/{id}(id=${boleta.idBoleta})}" class="btn btn-warning">Editar</a>
+                        <button th:data-id="${boleta.idBoleta}" class="btn btn-danger delete-btn">Eliminar</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+    <script>
+        // Función para eliminar una boleta
+        $(document).on('click', '.delete-btn', function() {
+            const boletaId = $(this).data('id');
+            if (confirm('¿Estás seguro de que deseas eliminar esta boleta?')) {
+                $.ajax({
+                    url: `/boleta/${boletaId}`,
+                    type: 'DELETE',
+                    success: function(result) {
+                        location.reload(); // Recargar la página después de la eliminación
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+		<title>Formulario Cliente</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<body>
+		  <div class="container mt-5">
+        <h2 class="mb-4">Formulario Cliente</h2>
+        <form action="/guardarCliente" method="POST">
+            <!-- ID Cliente (Solo Lectura) -->
+            <div class="mb-3">
+                <label for="idCliente" class="form-label">ID Cliente:</label>
+                <input type="text" class="form-control" id="idCliente" name="idCliente" readonly>
+            </div>
+
+            <!-- Nombre -->
+            <div class="mb-3">
+                <label for="nombre" class="form-label">Nombre:</label>
+                <input type="text" class="form-control" id="nombre" name="nombre" required maxlength="100">
+            </div>
+
+            <!-- Apellido -->
+            <div class="mb-3">
+                <label for="apellido" class="form-label">Apellido:</label>
+                <input type="text" class="form-control" id="apellido" name="apellido" required maxlength="100">
+            </div>
+
+            <!-- Email -->
+            <div class="mb-3">
+                <label for="email" class="form-label">Email:</label>
+                <input type="email" class="form-control" id="email" name="email" required maxlength="100">
+            </div>
+
+            <!-- Teléfono -->
+            <div class="mb-3">
+                <label for="telefono" class="form-label">Teléfono:</label>
+                <input type="text" class="form-control" id="telefono" name="telefono" maxlength="15">
+            </div>
+
+            <!-- Fecha de Creación -->
+            <div class="mb-3">
+                <label for="fechaCreacion" class="form-label">Fecha de Creación:</label>
+                <input type="date" class="form-control" id="fechaCreacion" name="fechaCreacion">
+            </div>
+
+            <!-- Usuario (Clave foránea) -->
+            <div class="mb-3">
+                <label for="usuario" class="form-label">Usuario:</label>
+                <select id="usuario" name="usuario_id" class="form-select" required>
+                    <option value="">Seleccione un usuario</option>
+                    <!-- Aquí irían las opciones de usuarios que se recuperan del backend -->
+                    <option value="1">Usuario 1</option>
+                    <option value="2">Usuario 2</option>
+                </select>
+            </div>
+
+            <!-- Botón de Guardar -->
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-primary">Guardar Cliente</button>
+            </div>
+		</form>
+	</div>
+	<!-- Vincular JavaScript de Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
+import java.sql.Date;
 
 @Entity
 @Table(name = "tb_boleta")
@@ -20,13 +20,6 @@ public class BoletaEntity {
     @Column(name = "id_boleta")
     private Integer idBoleta; // Clave primaria
 
-    @ManyToOne
-    @JoinColumn(name = "pedido_id", nullable = false) // Clave foránea hacia PedidoEntity
-    private PedidoEntity pedido;
-
-    @ManyToOne
-    @JoinColumn(name = "usuario_id", nullable = false) // Clave foránea hacia UsuarioEntity
-    private UsuarioEntity usuario;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "fecha")
@@ -34,4 +27,33 @@ public class BoletaEntity {
 
     @Column(name = "total_cobrar", nullable = false)
     private Double totalCobrar;
+
+	public Integer getIdBoleta() {
+		return idBoleta;
+	}
+
+	public void setIdBoleta(Integer idBoleta) {
+		this.idBoleta = idBoleta;
+	}
+
+
+	public Date getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
+	}
+
+	public Double getTotalCobrar() {
+		return totalCobrar;
+	}
+
+	public void setTotalCobrar(Double totalCobrar) {
+		this.totalCobrar = totalCobrar;
+	}
+
+
+
+
 }

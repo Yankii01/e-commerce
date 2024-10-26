@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Boleta</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.min.css">
+</head>
+<body>
+    <div class="container my-5">
+        <h2 class="text-center mb-4">Registrar Boleta</h2>
+
+        <form th:action="@{/listarBoleta}" method="POST" th:object="${boleta}" onsubmit="guardarBoleta(event)">
+            <!-- Fecha de la Boleta -->
+            <div class="form-group">
+                <label for="fecha">Fecha de Boleta</label>
+                <input type="date" class="form-control" id="fecha" th:field="*{fecha}" required>
+            </div>
+
+            <!-- Total a Cobrar -->
+            <div class="form-group">
+                <label for="totalCobrar">Total a Cobrar (S/)</label>
+                <input type="number" class="form-control" id="totalCobrar" th:field="*{totalCobrar}" step="0.01" min="0" required placeholder="Ingrese el total a cobrar">
+            </div>
+
+            <div class="mt-3">
+                <a class="btn btn-secondary" href="/login">Ir al Login</a>
+                <button class="btn btn-primary" type="submit">Registrar Boleta</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.all.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Función de guardado con SweetAlert para confirmar el registro
+        function guardarBoleta(event) {
+            event.preventDefault();
+            Swal.fire({
+                icon: 'success',
+                title: 'Boleta Registrada',
+                text: 'La boleta ha sido registrada exitosamente.',
+                confirmButtonText: 'Cerrar'
+            }).then(() => {
+                event.target.submit(); // Envía el formulario tras la alerta de confirmación
+            });
+        }
+    </script>
+</body>
+</html>

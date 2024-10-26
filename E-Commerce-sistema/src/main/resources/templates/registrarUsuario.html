@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Usuario</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container my-5">
+        <h2 class="text-center mb-4">Registrar Usuario</h2>
+
+        <form th:action="@{/listarUsuario}" method="POST" th:object="${usuario}" onsubmit="guardarUsuario(event)">
+            <div class="form-group">
+                <label for="nombre"><i class="bi bi-person-fill"></i> Nombre</label>
+                <input type="text" class="form-control" id="nombre" th:field="*{nombre}" maxlength="100" placeholder="Ingrese su nombre" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="email"><i class="bi bi-envelope-fill"></i> Email</label>
+                <input type="email" class="form-control" id="email" th:field="*{email}" maxlength="100" placeholder="Ingrese su email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="contraseña"><i class="bi bi-lock-fill"></i> Contraseña</label>
+                <input type="password" class="form-control" id="contraseña" th:field="*{contraseña}" maxlength="100" placeholder="Ingrese su contraseña" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="fechaCreacion"><i class="bi bi-calendar-fill"></i> Fecha de Creación</label>
+                <input type="date" class="form-control" id="fechaCreacion" th:field="*{fechaCreacion}" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Registrar</button>
+            <a th:href="@{/login}" class="btn btn-secondary btn-block">
+                <i class="bi bi-arrow-left-circle-fill"></i> Cancelar
+            </a>
+        
+
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.all.min.js"></script>
+         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+        <script>
+            function guardarUsuario(event) {
+                event.preventDefault(); 
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Usuario Registrado',
+                    text: 'El usuario ha sido registrado exitosamente.',
+                    confirmButtonText: 'Cerrar'
+                }).then(() => {
+                    event.target.submit(); 
+                });
+            }
+        </script>
+    </div>
+</body>
+</html>

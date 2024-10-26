@@ -18,17 +18,39 @@ public class DetallePedidoEntity {
     @Column(name = "id_det_ped")
     private Integer idDetPed; // Clave primaria
 
-    @ManyToOne
-    @JoinColumn(name = "pedido_id", nullable = false) // Clave foránea hacia PedidoEntity
-    private PedidoEntity pedido;
 
-    @ManyToOne
-    @JoinColumn(name = "producto_id", nullable = false) // Clave foránea hacia ProductoEntity
-    private ProductoEntity producto;
 
     @Column(name = "cantidad", nullable = false)
     private Integer cantidad;
 
     @Column(name = "precio", nullable = false)
     private Double precio; // Precio del producto en el momento del pedido
+
+	public Integer getIdDetPed() {
+		return idDetPed;
+	}
+
+	public void setIdDetPed(Integer idDetPed) {
+		this.idDetPed = idDetPed;
+	}
+
+
+
+	public Integer getCantidad() {
+		return cantidad;
+	}
+
+	public void setCantidad(Integer cantidad) {
+		this.cantidad = cantidad;
+	}
+
+	public Double getPrecio() {
+		return precio;
+	}
+
+	public void setPrecio(Double precio) {
+		this.precio = precio;
+	}
+
+
 }

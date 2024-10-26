@@ -27,9 +27,57 @@ public class ProductoEntity {
     @Column(name = "fecha_creacion")
     private Date fechaCreacion;
 
-    @Column(name = "estado", nullable = false, length = 20)
-    private String estado; // PENDIENTE, COMPLETADO, CANCELADO
 
     @Column(name = "precio", nullable = false)
     private Double precio; // Precio del producto
+    
+    @Column(name = "url_imagen", nullable = false)
+    private String urlImagen;
+
+	public String getUrlImagen() {
+		return urlImagen;
+	}
+
+	public void setUrlImagen(String urlImagen) {
+		this.urlImagen = urlImagen;
+	}
+
+	public Integer getIdProducto() {
+		return idProducto;
+	}
+
+	public void setIdProducto(Integer idProducto) {
+		this.idProducto = idProducto;
+	}
+
+	public String getNombre() {
+		return nombre;
+	}
+
+	public void setNombre(String nombre) {
+		this.nombre = nombre;
+	}
+
+	public Date getFechaCreacion() {
+		return fechaCreacion;
+	}
+
+	public void setFechaCreacion(Date fechaCreacion) {
+		this.fechaCreacion = fechaCreacion;
+	}
+
+
+
+	public Double getPrecio() {
+		return precio;
+	}
+
+	public void setPrecio(Double precio) {
+		this.precio = precio;
+	}
+
+
+
+
+
 }

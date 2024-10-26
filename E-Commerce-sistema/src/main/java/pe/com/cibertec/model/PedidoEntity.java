@@ -29,17 +29,42 @@ public class PedidoEntity {
     @Column(name = "id_pedido")
     private Integer idPedido; // Clave primaria
 
-    @ManyToOne
-    @JoinColumn(name = "cliente_id", nullable = false) // Clave foránea hacia ClienteEntity
-    private ClienteEntity cliente;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "fecha_pedido")
     private Date fechaPedido;
 
-    @Column(name = "estado", nullable = false, length = 20)
-    private String estado; // PENDIENTE, COMPLETADO, CANCELADO
-
     @Column(name = "total", nullable = false)
     private Double total;
+
+	public Integer getIdPedido() {
+		return idPedido;
+	}
+
+	public void setIdPedido(Integer idPedido) {
+		this.idPedido = idPedido;
+	}
+
+ 
+
+	public Date getFechaPedido() {
+		return fechaPedido;
+	}
+
+	public void setFechaPedido(Date fechaPedido) {
+		this.fechaPedido = fechaPedido;
+	}
+
+
+
+	public Double getTotal() {
+		return total;
+	}
+
+	public void setTotal(Double total) {
+		this.total = total;
+	}
+    
+    
+    
 }

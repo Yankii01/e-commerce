@@ -1,68 +1,73 @@
-<!DOCTYPE HTML>
-<html>
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
-		<title>Formulario Cliente</title>
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Cliente</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- SweetAlert2 CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.min.css">
 </head>
-
 <body>
-		  <div class="container mt-5">
-        <h2 class="mb-4">Formulario Cliente</h2>
-        <form action="/guardarCliente" method="POST">
-            <!-- ID Cliente (Solo Lectura) -->
-            <div class="mb-3">
-                <label for="idCliente" class="form-label">ID Cliente:</label>
-                <input type="text" class="form-control" id="idCliente" name="idCliente" readonly>
+    <div class="container my-5">
+        <h2 class="text-center mb-4">Registrar Cliente</h2>
+
+        <form th:action="@{/listarClientes}" method="POST" th:object="${cliente}" onsubmit="guardarCliente(event)">
+            <!-- Nombre del Cliente -->
+            <div class="form-group">
+                <label for="nombre">Nombre del Cliente</label>
+                <input type="text" class="form-control" id="nombre" th:field="*{nombre}" maxlength="100" required placeholder="Ingrese el nombre del cliente">
             </div>
 
-            <!-- Nombre -->
-            <div class="mb-3">
-                <label for="nombre" class="form-label">Nombre:</label>
-                <input type="text" class="form-control" id="nombre" name="nombre" required maxlength="100">
+            <!-- Apellido del Cliente -->
+            <div class="form-group">
+                <label for="apellido">Apellido del Cliente</label>
+                <input type="text" class="form-control" id="apellido" th:field="*{apellido}" maxlength="100" required placeholder="Ingrese el apellido del cliente">
             </div>
 
-            <!-- Apellido -->
-            <div class="mb-3">
-                <label for="apellido" class="form-label">Apellido:</label>
-                <input type="text" class="form-control" id="apellido" name="apellido" required maxlength="100">
+            <!-- Email del Cliente -->
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" th:field="*{email}" required placeholder="Ingrese el email del cliente">
             </div>
 
-            <!-- Email -->
-            <div class="mb-3">
-                <label for="email" class="form-label">Email:</label>
-                <input type="email" class="form-control" id="email" name="email" required maxlength="100">
+            <!-- Contraseña del Cliente -->
+            <div class="form-group">
+                <label for="password">Contraseña</label>
+                <input type="password" class="form-control" id="password" th:field="*{password}" required placeholder="Ingrese la contraseña">
             </div>
 
-            <!-- Teléfono -->
-            <div class="mb-3">
-                <label for="telefono" class="form-label">Teléfono:</label>
-                <input type="text" class="form-control" id="telefono" name="telefono" maxlength="15">
+            <!-- Teléfono del Cliente -->
+            <div class="form-group">
+                <label for="telefono">Teléfono</label>
+                <input type="text" class="form-control" id="telefono" th:field="*{telefono}" maxlength="15" placeholder="Ingrese el teléfono del cliente">
             </div>
 
-            <!-- Fecha de Creación -->
-            <div class="mb-3">
-                <label for="fechaCreacion" class="form-label">Fecha de Creación:</label>
-                <input type="date" class="form-control" id="fechaCreacion" name="fechaCreacion">
+            <div class="container mt-3">
+                <a class="btn btn-secondary" href="/login">Ir al Login</a>
+                <button class="btn btn-primary" type="submit">Registrar Cliente</button>
             </div>
+        </form>
 
-            <!-- Usuario (Clave foránea) -->
-            <div class="mb-3">
-                <label for="usuario" class="form-label">Usuario:</label>
-                <select id="usuario" name="usuario_id" class="form-select" required>
-                    <option value="">Seleccione un usuario</option>
-                    <!-- Aquí irían las opciones de usuarios que se recuperan del backend -->
-                    <option value="1">Usuario 1</option>
-                    <option value="2">Usuario 2</option>
-                </select>
-            </div>
+    <!-- SweetAlert2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.all.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
 
-            <!-- Botón de Guardar -->
-            <div class="d-grid gap-2">
-                <button type="submit" class="btn btn-primary">Guardar Cliente</button>
-            </div>
-		</form>
-	</div>
-	<!-- Vincular JavaScript de Bootstrap -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Función de guardado con SweetAlert para confirmar el registro
+        function guardarCliente(event) {
+            event.preventDefault();
+            Swal.fire({
+                icon: 'success',
+                title: 'Cliente Registrado',
+                text: 'El cliente ha sido registrado exitosamente.',
+                confirmButtonText: 'Cerrar'
+            }).then(() => {
+                event.target.submit(); // Envía el formulario tras la alerta de confirmación
+            });
+        }
+    </script>
 </body>
 </html>

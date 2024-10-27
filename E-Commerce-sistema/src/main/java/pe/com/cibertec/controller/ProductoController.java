@@ -14,7 +14,8 @@ public class ProductoController {
 
     @Autowired
     private ProductoService productoService;
-
+    
+    
     @GetMapping("/registrarProductos")
     public String mostrarFormularioProducto(Model model) {
         model.addAttribute("producto", new ProductoEntity());

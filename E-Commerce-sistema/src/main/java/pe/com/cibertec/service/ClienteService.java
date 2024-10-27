@@ -10,5 +10,5 @@ public interface ClienteService {
     Optional<ClienteEntity> buscarClienteById(Integer idCliente);
     ClienteEntity actualizarCliente(ClienteEntity cliente);
     void eliminarClienteById(Integer idCliente);
-    void guardarCliente();
+    void guardarProducto();
 }

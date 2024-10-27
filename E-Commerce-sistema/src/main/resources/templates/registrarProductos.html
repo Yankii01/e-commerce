@@ -35,8 +35,8 @@
                 <label for="exampleFormControlFile1" class="form-label">
                     <i class="bi bi-image-fill"></i> Foto Usuario
                 </label>
-                <input type="file" class="form-control-file" id="exampleFormControlFile1" th:field="*{urlImagen}" accept="image/*" required>
-                <img id="imagePreview" src="https://via.placeholder.com/150" class="image-preview" alt="Vista previa de la imagen">
+                <input type="file" class="form-control-file" id="exampleFormControlFile1" th:field="{urlImagen}" accept="image/" required>
+<img src="${urlImagen}" alt="Imagen del Producto" />
             </div>
 
             <div class="container mt-3">

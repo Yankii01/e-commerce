@@ -5,52 +5,76 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Registrar Usuario</title>
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa; /* Color de fondo suave */
+        }
+        .container {
+            background-color: white; /* Fondo blanco para el contenedor */
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra suave */
+        }
+        h2 {
+            color: #007bff; /* Color del título */
+        }
+    </style>
 </head>
 <body>
     <div class="container my-5">
-        <h2 class="text-center mb-4">Registrar Usuario</h2>
+        <h2 class="text-center mb-4"><i class="fas fa-user-plus"></i> Registrar Usuario</h2>
 
         <form th:action="@{/listarUsuario}" method="POST" th:object="${usuario}" onsubmit="guardarUsuario(event)">
+            <!-- Nombre del Usuario -->
             <div class="form-group">
-                <label for="nombre"><i class="bi bi-person-fill"></i> Nombre</label>
-                <input type="text" class="form-control" id="nombre" th:field="*{nombre}" maxlength="100" placeholder="Ingrese su nombre" required>
+                <label for="nombre"><i class="fas fa-user"></i> Nombre del Usuario</label>
+                <input type="text" class="form-control" id="nombre" th:field="*{nombre}" maxlength="100" required placeholder="Ingrese el nombre del usuario">
             </div>
-            
+
+            <!-- Email -->
             <div class="form-group">
-                <label for="email"><i class="bi bi-envelope-fill"></i> Email</label>
-                <input type="email" class="form-control" id="email" th:field="*{email}" maxlength="100" placeholder="Ingrese su email" required>
+                <label for="email"><i class="fas fa-envelope"></i> Email</label>
+                <input type="email" class="form-control" id="email" th:field="*{email}" required placeholder="Ingrese su correo electrónico">
             </div>
-            
+
+            <!-- Contraseña -->
             <div class="form-group">
-                <label for="contraseña"><i class="bi bi-lock-fill"></i> Contraseña</label>
-                <input type="password" class="form-control" id="contraseña" th:field="*{contraseña}" maxlength="100" placeholder="Ingrese su contraseña" required>
+                <label for="contraseña"><i class="fas fa-lock"></i> Contraseña</label>
+                <input type="password" class="form-control" id="contraseña" th:field="*{contraseña}" required placeholder="Ingrese su contraseña">
             </div>
-            
+
+            <!-- Fecha de Creación -->
             <div class="form-group">
-                <label for="fechaCreacion"><i class="bi bi-calendar-fill"></i> Fecha de Creación</label>
+                <label for="fechaCreacion"><i class="fas fa-calendar-alt"></i> Fecha de Creación</label>
                 <input type="date" class="form-control" id="fechaCreacion" th:field="*{fechaCreacion}" required>
             </div>
 
-            <button type="submit" class="btn btn-primary">Registrar</button>
-            <a th:href="@{/login}" class="btn btn-secondary btn-block">
-                <i class="bi bi-arrow-left-circle-fill"></i> Cancelar
-            </a>
-        
+            <!-- Botones -->
+            <div class="container mt-3">
+                <a class="btn btn-secondary" href="/login"><i class="fas fa-arrow-left"></i> Ir al Login</a>
+                <button class="btn btn-primary" type="submit"><i class="fas fa-user-plus"></i> Registrar Usuario</button>
+            </div>
+        </form>
 
+        <!-- SweetAlert2 JS -->
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.all.min.js"></script>
-         <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+
         <script>
+            // Función de guardado con SweetAlert para confirmar el registro
             function guardarUsuario(event) {
-                event.preventDefault(); 
+                event.preventDefault();
                 Swal.fire({
                     icon: 'success',
                     title: 'Usuario Registrado',
                     text: 'El usuario ha sido registrado exitosamente.',
                     confirmButtonText: 'Cerrar'
                 }).then(() => {
-                    event.target.submit(); 
+                    event.target.submit();
                 });
             }
         </script>

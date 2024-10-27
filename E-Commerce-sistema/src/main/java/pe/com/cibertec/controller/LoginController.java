@@ -26,7 +26,7 @@ public class LoginController {
         UsuarioEntity usuario = usuarioService.encontrarPorEmail(email);
         if (usuario != null && contraseña.equals(usuario.getContraseña())) {
             // Autenticación exitosa
-            return "redirect:/trabajadorVista"; // Redirigir a la página principal
+            return "redirect:/"; // Redirigir a la página principal
         }
         model.addAttribute("error", "Credenciales inválidas");
         return "login"; // Regresar al formulario de login

@@ -14,24 +14,40 @@ public class PedidoServiceImpl implements PedidoService {
 
     @Autowired
     private PedidoRepository pedidoRepository;
+    
+    @Override
+    public PedidoEntity crearPedido(PedidoEntity pedido) {
+    	return pedidoRepository.save(pedido);
+    }
 
     @Override
-    public List<PedidoEntity> listarPedidos() {
+    public List<PedidoEntity> listarPedido() {
         return pedidoRepository.findAll();
     }
 
     @Override
-    public Optional<PedidoEntity> getPedidoById(Integer id) {
-        return pedidoRepository.findById(id);
+    public Optional<PedidoEntity> buscarPedidoById(Integer idPedido) {
+        return pedidoRepository.findById(idPedido);
     }
 
     @Override
-    public PedidoEntity guardarPedido(PedidoEntity pedido) {
+    public PedidoEntity actualizarPedido(PedidoEntity pedido) {
+    	if (pedidoRepository.existsById(pedido.getIdPedido())) {
         return pedidoRepository.save(pedido);
+    } else {
+    	throw new IllegalArgumentException("El Pedido con ID " + pedido.getIdPedido() + " no existe.");
     }
 
-    @Override
-    public void eliminarPedido(Integer id) {
-        pedidoRepository.deleteById(id);
     }
+    
+
+    public void eliminarPedidoById(Integer idPedido) {
+        pedidoRepository.deleteById(idPedido); // Método que elimina el pedido usando el repositorio
+    }
+
+	@Override
+	public void guardarPedido() {
+		// TODO Auto-generated method stub
+		
+	}
 }

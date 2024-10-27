@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Login</title>
+    <title>Login Usuario</title>
     <link rel="stylesheet" href="https://unicons.iconscout.com/release/v2.1.9/css/unicons.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <style>
@@ -111,6 +111,11 @@
             color: #1f293a;
             font-weight: 600;
         }
+        .admin-btn {
+            margin-top: 10px;
+            background-color: #ffc107;
+            color: #1f293a;
+        }
         .signup-link {
             margin: 20px 0 10px;
             text-align: center;
@@ -129,7 +134,7 @@
 <body>
     <div class="container">
         <div class="login-box">
-            <h2>Login</h2>
+            <h2>Login Usuario</h2>
             <div class="card-body">
                 <form th:action="@{/login}" th:object="${usuario}" method="POST">
                     <div class="input-box">
@@ -143,14 +148,13 @@
                         <label>Contraseña</label>
                     </div>
                     <div class="forgot-password">
-                      
-                        
                         <a href="#" th:href="@{/forgot-password}">¿Olvidaste tu contraseña?</a>
                     </div>
                     <button type="submit" class="btn">Ingresar</button>
                     <div class="signup-link">
                         <a th:href="@{/registrarUsuario}">Registrarse</a>
                     </div>
+              
                 </form>
             </div>
         </div>

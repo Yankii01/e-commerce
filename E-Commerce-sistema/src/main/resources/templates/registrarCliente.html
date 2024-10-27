@@ -1,71 +1,102 @@
-<!DOCTYPE html>
+<!DOCTYPE HTML>
 <html lang="es" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registrar Cliente</title>
-    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-    <!-- SweetAlert2 CSS -->
+    <title>Formulario Cliente</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.min.css">
+    <style>
+        .image-preview {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            object-fit: cover;
+            display: block;
+            margin: 20px auto;
+            border: 2px solid #ddd;
+        }
+    </style>
 </head>
+
 <body>
-    <div class="container my-5">
-        <h2 class="text-center mb-4">Registrar Cliente</h2>
+    <div class="container mt-5">
+        <h2 class="mb-4">Registrar Cliente</h2>
 
-        <form th:action="@{/listarClientes}" method="POST" th:object="${cliente}" onsubmit="guardarCliente(event)">
-            <!-- Nombre del Cliente -->
-            <div class="form-group">
-                <label for="nombre">Nombre del Cliente</label>
-                <input type="text" class="form-control" id="nombre" th:field="*{nombre}" maxlength="100" required placeholder="Ingrese el nombre del cliente">
+        <form id="userForm" th:action="@{/listarCliente}" method="POST" th:object="${cliente}" enctype="multipart/form-data" onsubmit="guardarUsuario(event)">
+            <!-- Nombre -->
+            <div class="mb-3">
+                <label for="nombre" class="form-label">
+                    <i class="bi bi-person-fill"></i> Nombre:
+                </label>
+                <input type="text" class="form-control" id="nombre" th:field="*{nombre}" required maxlength="100">
             </div>
 
-            <!-- Apellido del Cliente -->
-            <div class="form-group">
-                <label for="apellido">Apellido del Cliente</label>
-                <input type="text" class="form-control" id="apellido" th:field="*{apellido}" maxlength="100" required placeholder="Ingrese el apellido del cliente">
+            <!-- Apellido -->
+            <div class="mb-3">
+                <label for="apellido" class="form-label">
+                    <i class="bi bi-person-fill"></i> Apellido:
+                </label>
+                <input type="text" class="form-control" id="apellido" th:field="*{apellido}" required maxlength="100">
             </div>
 
-            <!-- Email del Cliente -->
-            <div class="form-group">
-                <label for="email">Email</label>
-                <input type="email" class="form-control" id="email" th:field="*{email}" required placeholder="Ingrese el email del cliente">
+            <!-- Email -->
+            <div class="mb-3">
+                <label for="email" class="form-label">
+                    <i class="bi bi-envelope-fill"></i> Email:
+                </label>
+                <input type="email" class="form-control" id="email" th:field="*{email}" required maxlength="100">
             </div>
 
-            <!-- Contraseña del Cliente -->
-            <div class="form-group">
-                <label for="password">Contraseña</label>
-                <input type="password" class="form-control" id="password" th:field="*{password}" required placeholder="Ingrese la contraseña">
+            <!-- Contraseña -->
+            <div class="mb-3">
+                <label for="password" class="form-label">
+                    <i class="bi bi-lock-fill"></i> Contraseña:
+                </label>
+                <input type="password" class="form-control" id="password" th:field="*{password}" required maxlength="100">
             </div>
 
-            <!-- Teléfono del Cliente -->
-            <div class="form-group">
-                <label for="telefono">Teléfono</label>
-                <input type="text" class="form-control" id="telefono" th:field="*{telefono}" maxlength="15" placeholder="Ingrese el teléfono del cliente">
+            <!-- Teléfono -->
+            <div class="mb-3">
+                <label for="telefono" class="form-label">
+                    <i class="bi bi-telephone-fill"></i> Teléfono:
+                </label>
+                <input type="text" class="form-control" id="telefono" th:field="*{telefono}" maxlength="15">
+            </div>
+
+            <!-- Fecha de Creación -->
+            <div class="mb-3">
+                <label for="fechaCreacion" class="form-label">
+                    <i class="bi bi-calendar-fill"></i> Fecha de Creación:
+                </label>
+                <input type="date" class="form-control" id="fechaCreacion" th:field="*{fechaCreacion}">
             </div>
 
             <div class="container mt-3">
-                <a class="btn btn-secondary" href="/login">Ir al Login</a>
+                <a class="btn btn-secondary" href="/">Regresar al inicio</a>
                 <button class="btn btn-primary" type="submit">Registrar Cliente</button>
             </div>
         </form>
+    </div>
 
     <!-- SweetAlert2 JS -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.all.min.js"></script>
+
     <!-- Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-        // Función de guardado con SweetAlert para confirmar el registro
-        function guardarCliente(event) {
+        // Función de guardado con SweetAlert
+        function guardarUsuario(event) {
             event.preventDefault();
+            const form = document.getElementById("userForm");
             Swal.fire({
                 icon: 'success',
-                title: 'Cliente Registrado',
+                title: 'Cliente Guardado',
                 text: 'El cliente ha sido registrado exitosamente.',
                 confirmButtonText: 'Cerrar'
             }).then(() => {
-                event.target.submit(); // Envía el formulario tras la alerta de confirmación
+                form.submit(); // Envía el formulario después de la alerta de éxito
             });
         }
     </script>

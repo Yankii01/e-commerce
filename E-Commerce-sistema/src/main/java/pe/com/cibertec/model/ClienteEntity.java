@@ -39,8 +39,11 @@ public class ClienteEntity {
     @Column(name = "fecha_creacion")
     private Date fechaCreacion;
 
-	
-
+   
+    
+    
+    
+    
 	public Integer getIdCliente() {
 		return idCliente;
 	}

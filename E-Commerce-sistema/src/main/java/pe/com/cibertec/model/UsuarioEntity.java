@@ -14,12 +14,12 @@ import java.sql.Date;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-
 public class UsuarioEntity {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY) // Esto permite que 'usuario' sea AUTO_INCREMENT
-    @Column(name = "id_usuario")
-    private Integer idUsuario; // Clave primaria
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "id_usuario")
+	private Integer id_usuario; // Clave primaria
+
 
     @Column(name = "nombre", nullable = false, length = 100)
     private String nombre;
@@ -34,14 +34,12 @@ public class UsuarioEntity {
     @Column(name = "fecha_creacion")    
     private Date fechaCreacion;
 
-    
-    
 	public Integer getIdUsuario() {
-		return idUsuario;
+		return id_usuario;
 	}
 
-	public void setIdUsuario(Integer id_usuario) {
-		this.idUsuario = id_usuario;
+	public void setIdUsuario(Integer idUsuario) {
+		this.id_usuario = idUsuario;
 	}
 
 	public String getNombre() {
@@ -75,7 +73,5 @@ public class UsuarioEntity {
 	public void setFechaCreacion(Date fechaCreacion) {
 		this.fechaCreacion = fechaCreacion;
 	}
-
-
-    
+ 
 }

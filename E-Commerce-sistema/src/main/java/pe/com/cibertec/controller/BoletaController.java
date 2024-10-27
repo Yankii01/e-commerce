@@ -1,8 +1,10 @@
 package pe.com.cibertec.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -16,7 +18,7 @@ public class BoletaController {
     private BoletaService boletaService;
 
     @GetMapping("/registrarBoleta")
-    public String mostrarFormularioProducto(Model model) {
+    public String mostrarFormularioBoleta(Model model) {
         model.addAttribute("boleta", new BoletaEntity());
         return "registrarBoleta";
     }
@@ -28,8 +30,8 @@ public class BoletaController {
     }
 
     @GetMapping("/listarBoleta")
-    public String listarBoletas(Model model) {
-        model.addAttribute("boleta", boletaService.listarBoleta());
+    public String listarBoleta(Model model) {
+        model.addAttribute("boletas", boletaService.listarBoleta());
         return "listarBoleta";
     }
 
@@ -47,9 +49,11 @@ public class BoletaController {
         return "redirect:/listarBoleta";
     }
 
-    @GetMapping("/listarBoleta/{idBoleta}")
-    public String eliminarBoleta(@PathVariable Integer idBoleta) {
+    
+    
+    @DeleteMapping("/eliminarBoleta/{idBoleta}")
+    public ResponseEntity<Void> eliminarBoleta(@PathVariable Integer idBoleta) {
         boletaService.eliminarBoletaById(idBoleta);
-        return "redirect:/listarBoleta";
+        return ResponseEntity.noContent().build();
     }
 }

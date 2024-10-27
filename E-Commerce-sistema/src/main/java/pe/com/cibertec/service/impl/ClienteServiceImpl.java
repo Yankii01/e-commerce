@@ -17,7 +17,7 @@ public class ClienteServiceImpl implements ClienteService {
     
     @Override
     public ClienteEntity crearCliente(ClienteEntity cliente) {
-        return clienteRepository.save(cliente);
+    	return clienteRepository.save(cliente);
     }
 
     @Override
@@ -33,24 +33,25 @@ public class ClienteServiceImpl implements ClienteService {
     @Override
     public ClienteEntity actualizarCliente(ClienteEntity cliente) {
     	if (clienteRepository.existsById(cliente.getIdCliente())) {
-    		return clienteRepository.save(cliente);
-    	} else {
-    		throw new IllegalArgumentException("El Cliente con ID " + cliente.getIdCliente() + "no existe.");
-    	}
-        
+        return clienteRepository.save(cliente);
+    } else {
+    	throw new IllegalArgumentException("El Cliente con ID " + cliente.getIdCliente() + "no existe. ");
     }
-
+    }
+    
     @Override
     public void eliminarClienteById(Integer idCliente) {
     	if (clienteRepository.existsById(idCliente)) {
     		clienteRepository.deleteById(idCliente);
     	} else {
-        throw new IllegalArgumentException("El Cliente con ID " + idCliente + "no existe.");
+    		throw new IllegalArgumentException("El Cliente con ID " + idCliente + "no existe. ");
+    	}
+        
     }
-}
-    @Override
-	public void guardarCliente() {
+
+	@Override
+	public void guardarProducto() {
 		// TODO Auto-generated method stub
-    
-}
+		
+	}
 }

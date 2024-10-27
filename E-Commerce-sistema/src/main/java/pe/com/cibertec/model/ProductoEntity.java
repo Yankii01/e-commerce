@@ -76,6 +76,16 @@ public class ProductoEntity {
 		this.precio = precio;
 	}
 
+	public int getCantidad() {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	public void setCantidad(int i) {
+		// TODO Auto-generated method stub
+		
+	}
+
 
 
 

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modificar Usuario</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+<body>
+    <div class="container my-5">
+        <h2 class="text-center mb-4">Modificar Usuario</h2>
+
+        <!-- Formulario de modificación -->
+        <form th:action="@{/listarUsuario}" method="POST" th:object="${usuario}" onsubmit="confirmarGuardadoUsuario(event)">
+            <!-- Campo oculto para el ID del usuario -->
+            <input type="hidden" th:field="*{idUsuario}">
+
+            <!-- Nombre del Usuario -->
+            <div class="form-group">
+                <label for="nombre">Nombre del Usuario</label>
+                <input type="text" class="form-control" id="nombre" th:field="*{nombre}" maxlength="100" required placeholder="Ingrese el nombre del usuario">
+            </div>
+
+            <!-- Email del Usuario -->
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" th:field="*{email}" required placeholder="Ingrese el email del usuario">
+            </div>
+
+            <!-- Contraseña -->
+            <div class="form-group">
+                <label for="contraseña">Contraseña</label>
+                <input type="password" class="form-control" id="contraseña" th:field="*{contraseña}" required placeholder="Ingrese la contraseña del usuario">
+            </div>
+
+            <!-- Fecha de Creación -->
+            <div class="form-group">
+                <label for="fechaCreacion">Fecha de Creación</label>
+                <input type="date" class="form-control" id="fechaCreacion" th:field="*{fechaCreacion}" required>
+            </div>
+
+            <!-- Botones -->
+            <div class="d-flex justify-content-between">
+                <a class="btn btn-secondary" href="/usuarios">
+                    <i class="bi bi-arrow-left"></i> Volver
+                </a>
+                <button class="btn btn-primary" type="submit">
+                    <i class="bi bi-save"></i> Guardar Cambios
+                </button>
+            </div>
+        </form>
+    </div>
+
+    <!-- SweetAlert para confirmación de guardado -->
+    <script>
+    function editarUsuario(idUsuario) {
+        // Redirige a la página de modificación del usuario
+        window.location.href = `/modificarUsuario/${idUsuario}`; // Usando template literals
+    }
+    
+        function confirmarGuardadoUsuario(event) {
+            event.preventDefault(); // Evita el envío inmediato del formulario
+            Swal.fire({
+                title: '¿Deseas guardar los cambios?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Sí, guardar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    event.target.submit(); // Enviar formulario si se confirma
+                }
+            });
+        }
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

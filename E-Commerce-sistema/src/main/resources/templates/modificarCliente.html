@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modificar Cliente</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="mb-4 text-center">Modificar Cliente</h2>
+
+        <form th:action="@{/listarCliente}" th:object="${cliente}" method="POST">
+            <!-- ID del Cliente (oculto) -->
+            <input type="hidden" th:field="*{idCliente}" />
+
+            <!-- Nombre -->
+            <div class="mb-3">
+                <label for="nombre" class="form-label">
+                    <i class="bi bi-person-fill"></i> Nombre:
+                </label>
+                <input type="text" class="form-control" id="nombre" th:field="*{nombre}" required maxlength="100">
+            </div>
+
+            <!-- Apellido -->
+            <div class="mb-3">
+                <label for="apellido" class="form-label">
+                    <i class="bi bi-person-fill"></i> Apellido:
+                </label>
+                <input type="text" class="form-control" id="apellido" th:field="*{apellido}" required maxlength="100">
+            </div>
+
+            <!-- Email -->
+            <div class="mb-3">
+                <label for="email" class="form-label">
+                    <i class="bi bi-envelope-fill"></i> Email:
+                </label>
+                <input type="email" class="form-control" id="email" th:field="*{email}" required maxlength="100">
+            </div>
+
+            <!-- Teléfono -->
+            <div class="mb-3">
+                <label for="telefono" class="form-label">
+                    <i class="bi bi-telephone-fill"></i> Teléfono:
+                </label>
+                <input type="text" class="form-control" id="telefono" th:field="*{telefono}" maxlength="15">
+            </div>
+
+            <!-- Contraseña -->
+            <div class="mb-3">
+                <label for="password" class="form-label">
+                    <i class="bi bi-lock-fill"></i> Contraseña:
+                </label>
+                <input type="password" class="form-control" id="password" th:field="*{password}" required maxlength="100">
+            </div>
+
+            <!-- Botones -->
+            <div class="container mt-3">
+                <a class="btn btn-secondary" href="/listarCliente">Regresar a la lista</a>
+                <button class="btn btn-primary" type="submit">Actualizar Cliente</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

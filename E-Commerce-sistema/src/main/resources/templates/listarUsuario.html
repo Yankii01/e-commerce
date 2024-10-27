@@ -4,60 +4,78 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lista de Usuarios</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+
+        .table thead th {
+            background-color: #007bff;
+            color: white;
+        }
+
+        .table tbody tr:hover {
+            background-color: #e9ecef;
+        }
+    </style>
 </head>
 <body>
-    <div class="container mt-5">
-        <h2 class="mb-4 text-center">Lista de Usuarios</h2>
-
-        <!-- Tabla de usuarios -->
-        <table class="table table-striped">
+    <div class="container my-5">
+        <h2 class="text-center mb-4">Lista de Usuarios</h2>
+        <a href="/registrarUsuario" class="btn btn-success">
+            <i class="bi bi-plus-lg"></i> Agregar Usuario
+        </a>
+        <table class="table table-bordered">
             <thead>
                 <tr>
                     <th>ID</th>
                     <th>Nombre</th>
                     <th>Email</th>
+                    <th>Contraseña</th>
                     <th>Fecha de Creación</th>
                     <th>Acciones</th>
                 </tr>
             </thead>
             <tbody>
-                <!-- Iteración de usuarios -->
                 <tr th:each="usuario : ${usuarios}">
                     <td th:text="${usuario.idUsuario}"></td>
                     <td th:text="${usuario.nombre}"></td>
                     <td th:text="${usuario.email}"></td>
-                    <td th:text="${usuario.fechaCreacion}"></td>
+                    <td th:text="${usuario.contraseña}"></td>
+                    <td th:text="${#dates.format(usuario.fechaCreacion, 'yyyy-MM-dd')}"></td>
                     <td>
-                   <button class="btn btn-primary btn-sm" 
-        th:onclick="'editarUsuario(' + ${usuario.idUsuario} + ')'">
-    <i class="bi bi-pencil-square"></i> Editar
-</button>
-<button class="btn btn-danger btn-sm" 
-        th:onclick="'confirmarEliminacion(' + ${usuario.idUsuario} + ')'">
-    <i class="bi bi-trash"></i> Eliminar
-</button>
+                        <button class="btn btn-primary btn-sm" th:onclick="'editarUsuario(' + ${usuario.idUsuario} + ')'">
+                            <i class="bi bi-pencil-square"></i> Editar
+                        </button>
+                        <button class="btn btn-danger btn-sm" th:onclick="'confirmarEliminacionUsuario(' + ${usuario.idUsuario} + ')'">
+                            <i class="bi bi-trash"></i> Eliminar
+                        </button>
                     </td>
                 </tr>
             </tbody>
         </table>
+        <a href="/registrarUsuario" class="btn btn-primary">
+            <i class="bi bi-person-plus-fill"></i> Registrar Nuevo Usuario
+        </a>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-    <!-- SweetAlert y Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.2/dist/sweetalert2.all.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-
-    <!-- Script de SweetAlert para confirmar la eliminación -->
     <script>
-    function editarUsuario(idUsuario) {
-        // Redirige a la página de modificación del producto
-        window.location.href = `/modificarUsuario/${idUsuario}`;
-    }
-        function eliminarUsuario(idUsuario) {
+        function editarUsuario(idUsuario) {
+            // Redirige a la página de modificación del usuario
+            window.location.href = `/modificarUsuario/${idUsuario}`;
+        }
+
+        function confirmarEliminacionUsuario(idUsuario) {
             Swal.fire({
-                title: '¿Estás seguro de que deseas eliminar este usuario?',
+                title: '¿Estás seguro?',
+                text: "¡Esta acción no se puede deshacer!",
                 icon: 'warning',
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
@@ -66,11 +84,40 @@
                 cancelButtonText: 'Cancelar'
             }).then((result) => {
                 if (result.isConfirmed) {
-                    // Realizar la petición para eliminar el usuario
-                    window.location.href = `/eliminarUsuario/${idUsuario}`;
+                    // Construir la URL usando el ID del usuario
+                    fetch(`/eliminarUsuario/${idUsuario}`, {
+                        method: 'DELETE'
+                    })
+                    .then(response => {
+                        if (response.ok) {
+                            Swal.fire({
+                                title: 'Eliminado!',
+                                text: 'El usuario ha sido eliminado.',
+                                icon: 'success'
+                            }).then(() => {
+                                window.location.reload(); // Recargar la página
+                            });
+                        } else {
+                            Swal.fire({
+                                title: 'Error!',
+                                text: 'No se pudo eliminar el usuario.',
+                                icon: 'error'
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error al eliminar el usuario:', error);
+                        Swal.fire({
+                            title: 'Error!',
+                            text: 'Ocurrió un error inesperado.',
+                            icon: 'error'
+                        });
+                    });
                 }
             });
         }
+
+        
     </script>
 </body>
 </html>

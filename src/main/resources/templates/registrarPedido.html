@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrar Pedido</title>
+    <!-- Vincular Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="mb-4 text-center">Registrar Pedido</h2>
+        <form th:action="@{/listarPedido}" th:object="${pedido}" method="POST">
+            
+
+            <!-- Fecha del Pedido -->
+            <div class="mb-3">
+                <label for="fechaPedido" class="form-label"><i class="bi bi-calendar-date-fill"></i> Fecha del Pedido:</label>
+                <input type="date" class="form-control" id="fechaPedido" th:field="*{fechaPedido}" required>
+            </div>
+
+            <!-- Total -->
+            <div class="mb-3">
+                <label for="total" class="form-label"><i class="bi bi-currency-dollar"></i> Total:</label>
+                <input type="number" step="0.01" class="form-control" id="total" th:field="*{total}" required>
+            </div>
+
+            <!-- Botón de Guardar -->
+            <div class="d-grid gap-2">
+                <button type="submit" class="btn btn-primary"><i class="bi bi-save-fill"></i> Guardar Pedido</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Vincular JavaScript de Bootstrap -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
